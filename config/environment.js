@@ -4,7 +4,7 @@ module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'github-repo-viewer',
     environment,
-    rootURL: '/github-repo-viewer/',
+    rootURL: '/',
     locationType: 'history',
     EmberENV: {
       EXTEND_PROTOTYPES: false,
