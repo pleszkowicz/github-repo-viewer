@@ -1,0 +1,19 @@
+{{page-title "Login"}}
+
+<form {{on "submit" this.authenticate}}>
+  <p>GitHub Access Token:</p>
+
+    <input
+      autofocus
+      required
+      placeholder="Paste GH Token"
+      type="text"
+      value={{this.accessToken}}
+      {{on "input" this.updateAccessToken}}
+      {{on "enter" this.authenticate}}
+    />
+    {{#if this.errorMessage}}
+      <div class="error">{{this.errorMessage}}</div>
+    {{/if}}
+  <button type="submit">Authenticate</button>
+</form>

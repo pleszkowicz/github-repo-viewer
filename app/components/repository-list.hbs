@@ -1,0 +1,7 @@
+<ul class="repository-list">
+  {{#each @repositories as |repo|}}
+    <li>
+      <RepositoryItem @repository={{repo}} @organization={{@organization}} />
+    </li>
+  {{/each}}
+</ul>

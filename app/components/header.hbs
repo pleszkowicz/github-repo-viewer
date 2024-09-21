@@ -1,0 +1,10 @@
+<header>
+  <h1>GitHub Organization Viewer</h1>
+
+  {{#if this.auth.isAuthenticated}}
+    <p>
+      You are authenticated.
+      <LinkTo @route="logout">Logout</LinkTo>
+    </p>
+  {{/if}}
+</header>

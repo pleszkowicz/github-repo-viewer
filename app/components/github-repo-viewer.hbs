@@ -1,0 +1,45 @@
+<div>
+  <form {{on "submit" this.onSubmitOrganizationForm}}>
+    <p>Fetch organization repositories</p>
+    <input
+      autofocus
+      required
+      tabindex="0"
+      type="text"
+      placeholder="Repository name"
+      value={{this.organization}}
+      {{on "input" this.updateOrganization}}
+    />
+    <button type="submit" disabled={{this.isLoading}}>Fetch Repositories</button>
+
+
+    {{#if this.errorMessage}}
+      <div class="error">{{this.errorMessage}}</div>
+    {{/if}}
+
+  </form>
+</div>
+
+{{#if this.isLoading}}
+  <p>Loading repositories...</p>
+{{else if this.repositories.length}}
+  <div class="repository-content-wrapper">
+    <hr>
+    <Filters
+      @showPrivate={{this.showPrivate}}
+      @showPublic={{this.showPublic}}
+      @programmingLanguages={{this.programmingLanguages}}
+      @togglePrivate={{this.togglePrivate}}
+      @togglePublic={{this.togglePublic}}
+      @updateSelectedLanguages={{this.updateSelectedLanguages}}
+    />
+
+    <RepositoryList
+      @organization={{@organization}}
+      @repositories={{this.filteredRepositories}}
+    />
+  </div>
+{{else if this.showNoRepositoriesMessage}}
+  <p><strong>{{this.submittedOrganization}}</strong> organization has no repositories.</p>
+{{/if}}
+

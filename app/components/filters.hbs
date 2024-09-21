@@ -1,0 +1,24 @@
+<h3>Filters</h3>
+<p>
+  Repository visibility:
+  <FilterChipItem
+    @isSelected={{@showPrivate}}
+    @name="Private"
+    @onSelectionChange={{@togglePrivate}}
+  />
+  <FilterChipItem
+    @isSelected={{@showPublic}}
+    @name="Public"
+    @onSelectionChange={{@togglePublic}}
+  />
+</p>
+
+<label>
+  Programming languages:
+  {{#each @programmingLanguages as |programmingLanguage|}}
+    <FilterChipItem
+      @name={{programmingLanguage}}
+      @onSelectionChange={{@updateSelectedLanguages}}
+    />
+  {{/each}}
+</label>

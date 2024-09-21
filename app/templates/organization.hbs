@@ -1,0 +1,12 @@
+{{page-title "Github Organization overview"}}
+
+<GithubRepoViewer
+  @organization={{this.organization}}
+  @showPrivate={{this.showPrivate}}
+  @showPublic={{this.showPublic}}
+  @selectedLanguage={{this.selectedLanguage}}
+  @onOrganizationChange={{this.updateOrganization}}
+  @onShowPrivateChange={{this.updateShowPrivate}}
+  @onShowPublicChange={{this.updateShowPublic}}
+  @onSelectedLanguageChange={{this.updateSelectedLanguage}}
+/>
