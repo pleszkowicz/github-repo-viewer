@@ -14,12 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Set up Node.js using Volta (for managing specific versions)
-      - name: Set up Node.js
-        uses: volta-cli/action@v1  # Using Volta to manage Node and pnpm versions
+      # Set up Node.js with Volta
+      - name: Set up Node.js with Volta
+        uses: volta-cli/action@v1
         with:
           node-version: '20.6.1'  # Node.js version defined in your volta settings
-          pnpm: '9.10.0'          # pnpm version defined in your volta settings
+
+      # Install pnpm using Volta (manually)
+      - name: Install pnpm via Volta
+        run: volta install pnpm@9.10.0
 
       # Cache pnpm store to speed up builds
       - name: Cache pnpm store
@@ -36,7 +39,7 @@ jobs:
 
       # Build the Ember app for production
       - name: Build Ember app
-        run: pnpm run build --environment=production
+        run: pnpm run build -- --environment=production
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
