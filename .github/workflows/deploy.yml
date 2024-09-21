@@ -1,0 +1,46 @@
+name: Deploy Ember to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Run the action on push to the 'main' branch (adjust as needed)
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.6.1'  # Use the correct Node.js version for Ember
+
+      # Cache node_modules
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Build the Ember app
+      - name: Build Ember app
+        run: npm run build -- --environment=production
+
+      # Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token provided by Actions
+          publish_dir: ./dist  # Directory where Ember build output is stored
+          force_orphan: true  # Create an orphan branch for gh-pages

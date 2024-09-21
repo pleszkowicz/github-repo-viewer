@@ -18,17 +18,30 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      # Checkout the repository
+      - uses: actions/checkout@v4
+
+      # Set up Node.js and pnpm with Volta (specific versions from package.json)
+      - name: Set up Node.js and pnpm with Volta
+        uses: volta-cli/action@v1
         with:
-          version: 8
-      - name: Install Node
-        uses: actions/setup-node@v3
+          node-version: '20.6.1'  # Use the Node.js version from volta settings
+          pnpm: '9.10.0'          # Use the pnpm version from volta settings
+
+      # Cache pnpm store to speed up builds
+      - name: Cache pnpm store
+        uses: actions/cache@v3
         with:
-          node-version: 18
-          cache: pnpm
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      # Install dependencies using pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+
+      # Run linter
       - name: Lint
         run: pnpm lint
 
@@ -38,16 +51,29 @@ jobs:
     timeout-minutes: 10
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: pnpm/action-setup@v2
+      # Checkout the repository
+      - uses: actions/checkout@v4
+
+      # Set up Node.js and pnpm with Volta (specific versions from package.json)
+      - name: Set up Node.js and pnpm with Volta
+        uses: volta-cli/action@v1
         with:
-          version: 8
-      - name: Install Node
-        uses: actions/setup-node@v3
+          node-version: '20.6.1'  # Use the Node.js version from volta settings
+          pnpm: '9.10.0'          # Use the pnpm version from volta settings
+
+      # Cache pnpm store to speed up builds
+      - name: Cache pnpm store
+        uses: actions/cache@v3
         with:
-          node-version: 18
-          cache: pnpm
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      # Install dependencies using pnpm
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
+
+      # Run tests
       - name: Run Tests
         run: pnpm test
