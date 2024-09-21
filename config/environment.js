@@ -4,13 +4,13 @@ module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'github-repo-viewer',
     environment,
-    rootURL: '/',
-    locationType: 'history', // default for development
+    rootURL: '/', // Keep this as '/' for development and set it explicitly for production
+    locationType: 'history', // Default for development and testing
 
     EmberENV: {
       EXTEND_PROTOTYPES: false,
       FEATURES: {
-        // Here you can enable experimental features on an ember canary build
+        // Here you can enable experimental features
       },
     },
 
@@ -20,12 +20,12 @@ module.exports = function (environment) {
     },
 
     APP: {
-      // Flags/options to your application instance when it is created
+      // Application-specific settings
     },
   };
 
   if (environment === 'development') {
-    // Development specific options
+    // Development-specific settings
   }
 
   if (environment === 'test') {
@@ -35,11 +35,16 @@ module.exports = function (environment) {
   }
 
   if (environment === 'production') {
-    // Update the rootURL to match the GitHub Pages subdirectory
+    // Set the correct rootURL only once for production
     ENV.rootURL = '/github-repo-viewer/';
 
-    // Use 'hash' location type for GitHub Pages
+    // Use 'hash' location type for routing
     ENV.locationType = 'hash';
+
+    // Ensure no additional prepending of rootURL in fingerprinting
+    ENV.fingerprint = {
+      prepend: 'https://pleszkowicz.github.io/github-repo-viewer/', // Prepend full URL path for assets
+    };
   }
 
   return ENV;
