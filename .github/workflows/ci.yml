@@ -39,7 +39,7 @@ jobs:
 
       # Install dependencies using pnpm
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile  # Ensure dependencies are installed exactly as in pnpm-lock.yaml
 
       # Run linter
       - name: Lint
@@ -72,7 +72,7 @@ jobs:
 
       # Install dependencies using pnpm
       - name: Install Dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile  # Ensure dependencies are installed exactly as in pnpm-lock.yaml
 
       # Run tests
       - name: Run Tests
