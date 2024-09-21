@@ -39,7 +39,7 @@ module.exports = function (environment) {
     ENV.rootURL = '/github-repo-viewer/';
 
     // Use 'hash' location type for routing
-    ENV.locationType = 'history';
+    ENV.locationType = 'hash';
 
     // Ensure no additional prepending of rootURL in fingerprinting
     ENV.fingerprint = {
