@@ -3,44 +3,45 @@ name: Deploy Ember to GitHub Pages
 on:
   push:
     branches:
-      - main  # Run the action on push to the 'main' branch (adjust as needed)
+      - main  # Adjust if your default branch is different
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      # Checkout the repo
+      # Checkout the repository
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      # Set up Node.js
+      # Set up Node.js using Volta (for managing specific versions)
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: volta-cli/action@v1  # Using Volta to manage Node and pnpm versions
         with:
-          node-version: '20.6.1'  # Use the correct Node.js version for Ember
+          node-version: '20.6.1'  # Node.js version defined in your volta settings
+          pnpm: '9.10.0'          # pnpm version defined in your volta settings
 
-      # Cache node_modules
-      - name: Cache node_modules
-        uses: actions/cache@v2
+      # Cache pnpm store to speed up builds
+      - name: Cache pnpm store
+        uses: actions/cache@v3
         with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-node-
+            ${{ runner.os }}-pnpm-
 
-      # Install dependencies
+      # Install dependencies using pnpm
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile  # Use frozen lockfile for consistency
 
-      # Build the Ember app
+      # Build the Ember app for production
       - name: Build Ember app
-        run: npm run build -- --environment=production
+        run: pnpm run build --environment=production
 
       # Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token provided by Actions
-          publish_dir: ./dist  # Directory where Ember build output is stored
-          force_orphan: true  # Create an orphan branch for gh-pages
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Automatically provided by GitHub Actions
+          publish_dir: ./dist  # The directory where the Ember build output is located
+          force_orphan: true  # Ensure a clean gh-pages branch is used for deployment
