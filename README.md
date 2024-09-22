@@ -2,9 +2,10 @@
 
 This is a GitHub repository viewer built using Ember.js. It allows users to view public and private repositories for a GitHub organization by fetching data from the GitHub API. The app enables filtering repositories by programming language and toggling the display of private and public repositories.
 
-
 A working demo of this project is deployed via GitHub Pages and can be accessed here:
 [GitHub Repo Viewer Demo](https://pleszkowicz.github.io/github-repo-viewer)
+
+The app should work properly with recent major browsers. The app was developed in Chrome v128.
 
 ## Features
 
@@ -53,14 +54,18 @@ The app utilizes Ember’s service layer to handle state management, interaction
 
 An `index` route handles initial redirection based on user auth (token) state.
 
-## Data fetching
+### Data fetching
 
 The simplest way would be to use a regular `fetch`. However, to demonstrate Ember Data possibilities, I decided to utilize this module too. 
 
-## UI
+### UI
 
 Currently, this is the part that I'm the least proud of, because I focused on recalling Ember utilities after longer break and the app architecture was the main priority.
 I decided to use pure HTML and CSS. To enhance it further, it would be great to incorporate Flexbox / CSS Grid or use some UI library which handles it out of the box, including Design System.
+
+### Tests
+
+Included basic functionality test in component integration test files.
 
 ## Prerequisites
 
