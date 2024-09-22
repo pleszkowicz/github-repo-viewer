@@ -80,14 +80,14 @@ button {
   border-radius: 6px;
   border: 1px solid #afb5ba;
   transition: background-color 0.1s;
+}
 
-  &:hover {
-    background-color: #ddd;
-  }
+button:hover {
+  background-color: #ddd;
+}
 
-  &:active {
-    background-color: #ccc;
-  }
+button:active {
+  background-color: #ccc;
 }
 
 .btn-small {
@@ -103,20 +103,20 @@ button {
   border-radius: 16px;
   cursor: pointer;
   transition: background-color 0.2s;
+}
 
-  &:hover {
-    background-color: #f0f0f0;
-  }
+.chip:hover {
+  background-color: #f0f0f0;
 }
 
 .chip-selected {
   background-color: #007bff;
   color: white;
+}
 
-  &:hover {
-    background-color: #007bff;
-    color: white;
-  }
+.chip-selected:hover {
+  background-color: #007bff;
+  color: white;
 }
 
 .repository-item {
