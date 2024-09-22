@@ -1,6 +1,7 @@
 <button
   data-test-id={{@dataTestId}}
   class="chip {{if this._isSelected "chip-selected"}}" type="button" {{on "click" this.toggleSelection}}
+  aria-pressed="{{if this._isSelected "true" "false"}}"
 >
   {{@name}}
 </button>

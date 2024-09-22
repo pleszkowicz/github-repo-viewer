@@ -34,7 +34,7 @@ module('Integration | Component | github-repo-viewer', function (hooks) {
     assert
       .dom('[data-test-id="toggle-private"]')
       .hasAttribute(
-        'aria-checked',
+        'aria-pressed',
         'false',
         'Private repos visibility is toggled off',
       );
@@ -47,7 +47,7 @@ module('Integration | Component | github-repo-viewer', function (hooks) {
     assert
       .dom('[data-test-id="toggle-public"]')
       .hasAttribute(
-        'aria-checked',
+        'aria-pressed',
         'false',
         'Public repos visibility is toggled off',
       );
