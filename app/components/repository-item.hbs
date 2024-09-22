@@ -1,7 +1,7 @@
 <div class="card repository-item" data-test-id="repository-item">
   <div class="repository-column-1">
     <h3 class="repository-item-name">
-      {{!--   TODO: add owner img and/or other props too   --}}
+      {{!--   TODO: add owner img and/or possibly other props too   --}}
 
       <a href="{{this.repository.htmlUrl}}" target="_blank" rel="noopener noreferrer">
         <span data-test-id="repository-name">{{this.repository.name}}</span>
@@ -13,7 +13,6 @@
       |
       <code>{{if this.repository.private "Private" "Public"}} </code>
       |
-
       {{!--
         NOTE: I decided to not call branches endpoint automatically, because each repository would make 1 additional API call.
         In case of hundreds repos, it may exceed rate limit when user uses app heavily
