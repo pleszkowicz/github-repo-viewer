@@ -7,6 +7,9 @@ and toggling the display of private and public repositories.
 A working demo of this project is deployed via GitHub Pages and can be accessed here:
 [GitHub Repo Viewer Demo](https://pleszkowicz.github.io/github-repo-viewer)
 
+You can generate a personal GitHub access token for testing at https://github.com/settings/tokens.
+Choose the `repo` scope.
+
 The app should work properly with recent major browsers. The app was developed in Chrome v128.
 
 ## Features
@@ -69,8 +72,8 @@ utilize this module too.
 
 ### UI
 
-Currently, this is the part that I'm the least proud of, because I focused on recalling Ember utilities after longer
-break and the app architecture was the main priority.
+This is the part that I'm the least proud of, because I focused on recalling Ember utilities after longer
+break with Ember development and the app architecture was the main priority.
 I decided to use pure HTML and CSS. To enhance it further, it would be great to incorporate Flexbox / CSS Grid or use
 some UI library which handles it out of the box, including Design System.
 

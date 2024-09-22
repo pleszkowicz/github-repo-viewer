@@ -1,39 +1,47 @@
-<div class="repository-item" data-test-id="repository-item">
-  <div class="repository-info">
-    <h2>
+<div class="card repository-item" data-test-id="repository-item">
+  <div class="repository-column-1">
+    <h3 class="repository-item-name">
+      {{!--   TODO: add owner img and/or other props too   --}}
+
       <a href="{{this.repository.htmlUrl}}" target="_blank" rel="noopener noreferrer">
         <span data-test-id="repository-name">{{this.repository.name}}</span>
       </a>
-      | ⭐ {{this.repository.stargazersCount}}
-    </h2>
-    <p>
-      Programming Language:
-      {{if this.repository.language this.repository.language "Unknown"}}
-    </p>
-    <p>Private: {{if this.repository.private "Yes" "No"}}</p>
-    {{!--
-      NOTE: I decided to not call branches endpoint automatically, because each repository would make 1 additional API call.
-      In case of hundreds repos, it may exceed rate limit when user uses app heavily
-    --}}
-    <button type="button" {{on "click" this.toggleExpand}} data-test-id="expand-branches-button">
-      {{if this.isExpanded "Hide branches" "Show branches"}}
-    </button>
+      - ⭐ <small>{{this.repository.stargazersCount}}</small>
+    </h3>
+    <div>
+      <code>🧑‍💻 {{if this.repository.language this.repository.language "Unknown"}}</code>
+      |
+      <code>{{if this.repository.private "Private" "Public"}} </code>
+      |
+
+      {{!--
+        NOTE: I decided to not call branches endpoint automatically, because each repository would make 1 additional API call.
+        In case of hundreds repos, it may exceed rate limit when user uses app heavily
+      --}}
+      <button class="btn-small" type="button" {{on "click" this.toggleExpand}} data-test-id="expand-branches-button">
+        {{if this.isExpanded "Hide branches" "Fetch branches"}}
+      </button>
+    </div>
   </div>
 
-  {{#if this.isExpanded}}
-    {{#if this.errorMessage}}
-      <div class="error">{{this.errorMessage}}</div>
-    {{/if}}
+  <div class="repository-column-2">
+    {{#if this.isExpanded}}
+      {{#if this.errorMessage}}
+        <div class="error">{{this.errorMessage}}</div>
+      {{/if}}
 
-    {{#if this.branches}}
-      <p>Repository branch count: {{this.branches.length}}</p>
-      <ul class="branches-list" data-test-id="branches-list">
-        {{#each this.branches as |branch|}}
-          <li data-test-id="branches-item">{{branch.name}}</li>
-        {{/each}}
-      </ul>
-    {{else}}
-      <p>Loading branches...</p>
+      {{#if this.branches.length}}
+        <p class="repository-branch-list-header">
+          {{this.branches.length}} branch{{if (not-eq this.branches.length 1) "es"}}:
+        </p>
+        <ul class="branches-list" data-test-id="branches-list">
+          {{#each this.branches as |branch|}}
+            <li data-test-id="branches-item"><code>{{branch.name}}</code></li>
+          {{/each}}
+        </ul>
+      {{else}}
+        <p class="repository-branch-list-header">Loading branches...</p>
+      {{/if}}
     {{/if}}
-  {{/if}}
+  </div>
 </div>

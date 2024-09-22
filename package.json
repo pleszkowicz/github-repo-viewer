@@ -57,6 +57,7 @@
     "ember-simple-auth": "^6.1.0",
     "ember-source": "~5.11.0",
     "ember-template-lint": "^5.13.0",
+    "ember-truth-helpers": "^4.0.3",
     "ember-welcome-page": "^7.0.2",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
@@ -96,7 +97,6 @@
       "git add"
     ]
   },
-
   "volta": {
     "node": "20.6.1",
     "pnpm": "9.10.0"

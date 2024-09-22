@@ -13,8 +13,10 @@ export default class FilterChipItemComponent extends Component {
 
   @action
   toggleSelection() {
-    this._isSelected = !this._isSelected;
+    if (this.args.onSelectionChange) {
+      this._isSelected = !this._isSelected;
 
-    this.args.onSelectionChange(this.args.name, this._isSelected);
+      this.args.onSelectionChange(this.args.name, this._isSelected);
+    }
   }
 }
