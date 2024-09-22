@@ -35,7 +35,7 @@ The app should work properly with recent major browsers. The app was developed i
 Possible enhancements:
 
 - CSP
-- ideally, the authentication token should be stored eg. as http-only cookie
+- Ideally, the authentication token should be stored eg. as http-only cookie
 
 ## Architecture
 
