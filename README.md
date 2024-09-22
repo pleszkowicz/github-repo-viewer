@@ -1,6 +1,8 @@
 # github-repo-viewer
 
-This is a GitHub repository viewer built using Ember.js. It allows users to view public and private repositories for a GitHub organization by fetching data from the GitHub API. The app enables filtering repositories by programming language and toggling the display of private and public repositories.
+This is a GitHub repository viewer built using Ember.js. It allows users to view public and private repositories for a
+GitHub organization by fetching data from the GitHub API. The app enables filtering repositories by programming language
+and toggling the display of private and public repositories.
 
 A working demo of this project is deployed via GitHub Pages and can be accessed here:
 [GitHub Repo Viewer Demo](https://pleszkowicz.github.io/github-repo-viewer)
@@ -9,36 +11,42 @@ The app should work properly with recent major browsers. The app was developed i
 
 ## Features
 
-- Enter a GitHub organization name to fetch its repositories. 
+- Enter a GitHub organization name to fetch its repositories.
 - Display repository details, including:
-  - Name 
-  - Link to the repository 
-  - Programming language 
-  - Whether it's private or public 
+  - Name
+  - Link to the repository
+  - Programming language
+  - Whether it's private or public
   - Number of branches (on expand button click)
-- Filter repositories by programming language. 
-- Toggle between showing private and public repositories. 
+- Filter repositories by programming language.
+- Toggle between showing private and public repositories.
 - Handles authentication via a manually entered GitHub token, stored securely.
-- The app state keeps token, organization, and private/public filter toggles 
+- The app state keeps token, organization, and private/public filter toggles
 
 ## Security Considerations
 
 - The GitHub access token is stored in local storage and persists for long-term sessions, including page reloads.
-- A basic input validation for the GitHub organization name ensures that the input is properly formatted according to GitHub's naming conventions (alphanumeric, and hyphen, but no leading/trailing hyphens). 
+- A basic input validation for the GitHub organization name ensures that the input is properly formatted according to
+  GitHub's naming conventions (alphanumeric, and hyphen, but no leading/trailing hyphens).
 
 Possible enhancements:
+
 - CSP
-- ideally, the authentication token should be stored eg. as http-only cookie 
+- ideally, the authentication token should be stored eg. as http-only cookie
 
 ## Architecture
 
 ### Component-Based Architecture
 
-The application is built using Ember's component-based architecture, where each part of the UI is broken down into reusable components. This ensures that each component has a single responsibility, which improves maintainability and modularity.
+The application is built using Ember's component-based architecture, where each part of the UI is broken down into
+reusable components. This ensures that each component has a single responsibility, which improves maintainability and
+modularity.
 
 ### Service-Oriented Design
 
-The app utilizes Ember’s service layer to handle state management, interactions with GitHub’s API, and token storage. This approach abstracts the business logic from the UI components, resulting in a more maintainable and testable codebase.
+The app utilizes Ember’s service layer to handle state management, interactions with GitHub’s API, and token storage.
+This approach abstracts the business logic from the UI components, resulting in a more maintainable and testable
+codebase.
 
 #### GithubService:
 
@@ -56,12 +64,15 @@ An `index` route handles initial redirection based on user auth (token) state.
 
 ### Data fetching
 
-The simplest way would be to use a regular `fetch`. However, to demonstrate Ember Data possibilities, I decided to utilize this module too. 
+The simplest way would be to use a regular `fetch`. However, to demonstrate Ember Data possibilities, I decided to
+utilize this module too.
 
 ### UI
 
-Currently, this is the part that I'm the least proud of, because I focused on recalling Ember utilities after longer break and the app architecture was the main priority.
-I decided to use pure HTML and CSS. To enhance it further, it would be great to incorporate Flexbox / CSS Grid or use some UI library which handles it out of the box, including Design System.
+Currently, this is the part that I'm the least proud of, because I focused on recalling Ember utilities after longer
+break and the app architecture was the main priority.
+I decided to use pure HTML and CSS. To enhance it further, it would be great to incorporate Flexbox / CSS Grid or use
+some UI library which handles it out of the box, including Design System.
 
 ### Tests
 
