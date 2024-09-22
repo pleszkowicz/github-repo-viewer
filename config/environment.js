@@ -40,11 +40,6 @@ module.exports = function (environment) {
 
     // Use 'hash' location type for routing
     ENV.locationType = 'hash';
-
-    // Ensure no additional prepending of rootURL in fingerprinting
-    // ENV.fingerprint = {
-    //   prepend: 'https://pleszkowicz.github.io/github-repo-viewer/', // Prepend full URL path for assets
-    // };
   }
 
   return ENV;
