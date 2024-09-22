@@ -5,7 +5,7 @@ GitHub organization by fetching data from the GitHub API. The app enables filter
 and toggling the display of private and public repositories.
 
 A working demo of this project is deployed via GitHub Pages and can be accessed here:
-[GitHub Repo Viewer Demo](https://pleszkowicz.github.io/github-repo-viewer)
+[GitHub Repo Viewer Demo](https://pleszkowicz.github.io/github-repo-viewer).
 
 You can generate a personal GitHub access token for testing at https://github.com/settings/tokens.
 Choose the `repo` scope.
