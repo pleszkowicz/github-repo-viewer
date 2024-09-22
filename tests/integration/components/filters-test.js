@@ -6,21 +6,22 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | filters', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders with the correct data-test-id', async function (assert) {
+    this.set('noop', () => {});
 
-    await render(hbs`<Filters />`);
-
-    assert.dom().hasText('');
-
-    // Template block usage:
     await render(hbs`
-      <Filters>
-        template block text
-      </Filters>
+      <Filters
+        @showPrivate={{true}}
+        @showPublic={{false}}
+        @programmingLanguages={{array "JavaScript" "Python"}}
+        @togglePrivate={{this.noop}}
+        @togglePublic={{this.noop}}
+        @updateSelectedLanguages={{this.noop}}
+      />
     `);
 
-    assert.dom().hasText('template block text');
+    assert
+      .dom('[data-test-id="filters"]')
+      .exists('The component renders with the correct test ID');
   });
 });

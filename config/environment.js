@@ -4,8 +4,8 @@ module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'github-repo-viewer',
     environment,
-    rootURL: '/test', // Keep this as '/' for development and set it explicitly for production
-    locationType: 'hash', // Default for development and testing
+    rootURL: '/', // Keep this as '/' for development and set it explicitly for production
+    locationType: 'history', // Default for development and testing
 
     EmberENV: {
       EXTEND_PROTOTYPES: false,

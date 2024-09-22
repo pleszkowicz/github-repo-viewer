@@ -6,21 +6,37 @@ import { hbs } from 'ember-cli-htmlbars';
 module('Integration | Component | repository-list', function (hooks) {
   setupRenderingTest(hooks);
 
-  test('it renders', async function (assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.set('myAction', function(val) { ... });
+  test('it renders a list of repositories', async function (assert) {
+    // Set up repository data
+    this.set('repositories', [
+      { name: 'Repo 1', organization: 'org-1' },
+      { name: 'Repo 2', organization: 'org-2' },
+    ]);
 
-    await render(hbs`<RepositoryList />`);
-
-    assert.dom().hasText('');
-
-    // Template block usage:
+    // Render the component
     await render(hbs`
-      <RepositoryList>
-        template block text
-      </RepositoryList>
+      <RepositoryList @repositories={{this.repositories}} />
     `);
 
-    assert.dom().hasText('template block text');
+    // Check if the list contains two repository items
+    assert
+      .dom('[data-test-id="repository-item"]')
+      .exists({ count: 2 }, 'Two repository items are rendered');
+
+    // Get all the elements and verify the text for each one
+    const repositoryNames = this.element.querySelectorAll(
+      '[data-test-id="repository-name"]',
+    );
+
+    assert.strictEqual(
+      repositoryNames[0].textContent.trim(),
+      'Repo 1',
+      'First repository name is rendered',
+    );
+    assert.strictEqual(
+      repositoryNames[1].textContent.trim(),
+      'Repo 2',
+      'Second repository name is rendered',
+    );
   });
 });

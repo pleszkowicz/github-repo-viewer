@@ -1,26 +1,29 @@
-<h3>Filters</h3>
-<p>
-  Repository visibility:
-  <FilterChipItem
-    @isSelected={{@showPrivate}}
-    @name="Private"
-    @onSelectionChange={{@togglePrivate}}
-  />
-  <FilterChipItem
-    @isSelected={{@showPublic}}
-    @name="Public"
-    @onSelectionChange={{@togglePublic}}
-  />
-</p>
-
-<p>
-  Programming languages:
-  {{#each @programmingLanguages as |programmingLanguage|}}
+<div data-test-id="filters">
+  <h3>Filters</h3>
+  <p>
+    Repository visibility:
     <FilterChipItem
-      @name={{programmingLanguage}}
-      @onSelectionChange={{@updateSelectedLanguages}}
+      @dataTestId="toggle-private"
+      @isSelected={{@showPrivate}}
+      @name="Private"
+      @onSelectionChange={{@togglePrivate}}
     />
-  {{else}}
-    Unknown
-  {{/each}}
-</p>
+    <FilterChipItem
+      @dataTestId="toggle-public"
+      @isSelected={{@showPublic}}
+      @name="Public"
+      @onSelectionChange={{@togglePublic}}
+    />
+  </p>
+  <p>
+    Programming languages:
+    {{#each @programmingLanguages as |programmingLanguage|}}
+      <FilterChipItem
+        @name={{programmingLanguage}}
+        @onSelectionChange={{@updateSelectedLanguages}}
+      />
+    {{else}}
+      Unknown
+    {{/each}}
+  </p>
+</div>

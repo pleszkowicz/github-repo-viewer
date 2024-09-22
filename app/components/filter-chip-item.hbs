@@ -1,4 +1,5 @@
 <button
+  data-test-id={{@dataTestId}}
   class="chip {{if this._isSelected "chip-selected"}}" type="button" {{on "click" this.toggleSelection}}
 >
   {{@name}}

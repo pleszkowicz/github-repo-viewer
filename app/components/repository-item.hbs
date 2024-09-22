@@ -1,6 +1,11 @@
-<div class="repository-item">
+<div class="repository-item" data-test-id="repository-item">
   <div class="repository-info">
-    <h2><a href="{{this.repository.htmlUrl}}" target="_blank" rel="noopener noreferrer">{{this.repository.name}}</a> | ⭐ {{this.repository.stargazersCount}}</h2>
+    <h2>
+      <a href="{{this.repository.htmlUrl}}" target="_blank" rel="noopener noreferrer">
+        <span data-test-id="repository-name">{{this.repository.name}}</span>
+      </a>
+      | ⭐ {{this.repository.stargazersCount}}
+    </h2>
     <p>
       Programming Language:
       {{if this.repository.language this.repository.language "Unknown"}}
@@ -10,7 +15,7 @@
       NOTE: I decided to not call branches endpoint automatically, because each repository would make 1 additional API call.
       In case of hundreds repos, it may exceed rate limit when user uses app heavily
     --}}
-    <button type="button" {{on "click" this.toggleExpand}}>
+    <button type="button" {{on "click" this.toggleExpand}} data-test-id="expand-branches-button">
       {{if this.isExpanded "Hide branches" "Show branches"}}
     </button>
   </div>
@@ -21,9 +26,9 @@
     {{/if}}
     {{#if this.branches}}
       <p>Repository branch count: {{this.branches.length}}</p>
-      <ul class="branches-list">
+      <ul class="branches-list" data-test-id="branches-list">
         {{#each this.branches as |branch|}}
-          <li>{{branch.name}}</li>
+          <li data-test-id="branches-item">{{branch.name}}</li>
         {{/each}}
       </ul>
     {{else}}
