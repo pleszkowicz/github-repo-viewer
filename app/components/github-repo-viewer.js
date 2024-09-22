@@ -14,7 +14,6 @@ export default class GithubRepoViewerComponent extends Component {
   @tracked errorMessage = '';
 
   @tracked organization = '';
-  @tracked submittedOrganization = '';
   @tracked showPrivate = true;
   @tracked showPublic = true;
   @tracked selectedLanguages = [];

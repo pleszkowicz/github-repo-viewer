@@ -1,7 +1,6 @@
 <div>
   <Forms::OrganizationForm
-    @organization={{this.github.organization}}
-    @showPrivate={{this.github.showPrivate}}
+    @organization={{this.organization}}
     @isLoading={{this.isLoadingRepositories}}
     @errorMessage={{this.errorMessage}}
     @onSubmit={{this.onSubmitOrganizationForm}}
@@ -11,8 +10,10 @@
 {{#if this.isLoading}}
   <p>Loading repositories...</p>
 {{else if this.repositories.length}}
+
   <div class="repository-content-wrapper">
     <hr>
+
     <Filters
       @showPrivate={{this.showPrivate}}
       @showPublic={{this.showPublic}}
@@ -22,12 +23,13 @@
       @updateSelectedLanguages={{this.updateSelectedLanguages}}
     />
 
+    <hr>
+
     <RepositoryList
       @organization={{this.organization}}
       @repositories={{this.filteredRepositories}}
     />
   </div>
 {{else if this.showNoRepositoriesMessage}}
-  <p><strong>{{this.submittedOrganization}}</strong> organization has no repositories.</p>
+  <p><strong>{{this.organization}}</strong> organization has no repositories.</p>
 {{/if}}
-

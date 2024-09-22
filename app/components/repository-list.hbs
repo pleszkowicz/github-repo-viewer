@@ -1,7 +1,11 @@
-<ul class="repository-list">
-  {{#each @repositories as |repo|}}
-    <li>
-      <RepositoryItem @repository={{repo}} @organization={{@organization}} />
-    </li>
-  {{/each}}
-</ul>
+{{#if @repositories.length}}
+  <ul class="repository-list">
+    {{#each @repositories as |repo|}}
+      <li>
+        <RepositoryItem @repository={{repo}} @organization={{@organization}} />
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <h4>No matching repositories</h4>
+{{/if}}

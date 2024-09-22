@@ -4,8 +4,8 @@ module.exports = function (environment) {
   const ENV = {
     modulePrefix: 'github-repo-viewer',
     environment,
-    rootURL: '/', // Keep this as '/' for development and set it explicitly for production
-    locationType: 'history', // Default for development and testing
+    rootURL: '/test', // Keep this as '/' for development and set it explicitly for production
+    locationType: 'hash', // Default for development and testing
 
     EmberENV: {
       EXTEND_PROTOTYPES: false,
@@ -36,15 +36,15 @@ module.exports = function (environment) {
 
   if (environment === 'production') {
     // Set the correct rootURL only once for production
-    ENV.rootURL = '/github-repo-viewer/';
+    ENV.rootURL = '/github-repo-viewer';
 
     // Use 'hash' location type for routing
     ENV.locationType = 'hash';
 
     // Ensure no additional prepending of rootURL in fingerprinting
-    ENV.fingerprint = {
-      prepend: 'https://pleszkowicz.github.io/github-repo-viewer/', // Prepend full URL path for assets
-    };
+    // ENV.fingerprint = {
+    //   prepend: 'https://pleszkowicz.github.io/github-repo-viewer/', // Prepend full URL path for assets
+    // };
   }
 
   return ENV;

@@ -5,6 +5,9 @@ import { inject as service } from '@ember/service';
 export default class AuthService extends Service {
   @service storage;
 
+  // Note: Based on task limitations, I decided to keep token in the localStorage.
+  // Nevertheless, either local and session storage is vulnerable to XSS attacks.
+  // In a real app, I would suggest to eg. store token under http-only cookie.
   @tracked accessToken = null;
   @tracked isAuthenticated = false;
 
