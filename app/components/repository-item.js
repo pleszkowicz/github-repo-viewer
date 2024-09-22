@@ -1,10 +1,11 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
-import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
+import { inject as service } from '@ember/service';
 
 export default class RepositoryItemComponent extends Component {
-  @service store;
+  @service github;
+
   @tracked branches = null;
   @tracked isExpanded = false;
   @tracked errorMessage = '';
@@ -20,11 +21,9 @@ export default class RepositoryItemComponent extends Component {
       try {
         // this.branches = this.repository.get('branches');
         // Set access token in the adapter
-        this.branches = await this.store.query('branch', {
-          adapterOptions: {
-            organization: this.args.organization,
-            repositoryName: this.repository.name,
-          },
+        this.branches = await this.github.fetchBranches({
+          organization: this.args.organization,
+          repositoryName: this.repository.name,
         });
         // this.branches = branches.toArray();
         this.errorMessage = '';

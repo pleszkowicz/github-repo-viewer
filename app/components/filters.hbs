@@ -13,12 +13,14 @@
   />
 </p>
 
-<label>
+<p>
   Programming languages:
   {{#each @programmingLanguages as |programmingLanguage|}}
     <FilterChipItem
       @name={{programmingLanguage}}
       @onSelectionChange={{@updateSelectedLanguages}}
     />
+  {{else}}
+    Unknown
   {{/each}}
-</label>
+</p>

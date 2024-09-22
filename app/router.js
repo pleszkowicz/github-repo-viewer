@@ -7,7 +7,7 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('login');
+  this.route('github-token');
   this.route('organization');
 
   this.route('404', { path: '*path' });

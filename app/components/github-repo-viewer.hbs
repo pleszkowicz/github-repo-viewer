@@ -1,23 +1,11 @@
 <div>
-  <form {{on "submit" this.onSubmitOrganizationForm}}>
-    <p>Fetch organization repositories</p>
-    <input
-      autofocus
-      required
-      tabindex="0"
-      type="text"
-      placeholder="Repository name"
-      value={{this.organization}}
-      {{on "input" this.updateOrganization}}
-    />
-    <button type="submit" disabled={{this.isLoading}}>Fetch Repositories</button>
-
-
-    {{#if this.errorMessage}}
-      <div class="error">{{this.errorMessage}}</div>
-    {{/if}}
-
-  </form>
+  <Forms::OrganizationForm
+    @organization={{this.github.organization}}
+    @showPrivate={{this.github.showPrivate}}
+    @isLoading={{this.isLoadingRepositories}}
+    @errorMessage={{this.errorMessage}}
+    @onSubmit={{this.onSubmitOrganizationForm}}
+  />
 </div>
 
 {{#if this.isLoading}}
@@ -35,7 +23,7 @@
     />
 
     <RepositoryList
-      @organization={{@organization}}
+      @organization={{this.organization}}
       @repositories={{this.filteredRepositories}}
     />
   </div>

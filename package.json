@@ -22,7 +22,8 @@
     "lint:js:fix": "eslint . --fix",
     "start": "ember serve",
     "test": "concurrently \"pnpm:lint\" \"pnpm:test:*\" --names \"lint,test:\"",
-    "test:ember": "ember test"
+    "test:ember": "ember test",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
@@ -47,6 +48,7 @@
     "ember-cli-terser": "^4.0.2",
     "ember-data": "~5.3.8",
     "ember-fetch": "^8.1.2",
+    "ember-inflector": "^5.0.1",
     "ember-load-initializers": "^2.1.2",
     "ember-modifier": "^4.2.0",
     "ember-page-title": "^8.2.3",
@@ -62,6 +64,8 @@
     "eslint-plugin-n": "^16.6.2",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-qunit": "^8.1.1",
+    "husky": "^9.1.6",
+    "lint-staged": "^15.2.10",
     "loader.js": "^4.7.0",
     "prettier": "^3.3.3",
     "qunit": "^2.22.0",
@@ -78,6 +82,21 @@
   "ember": {
     "edition": "octane"
   },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.hbs": [
+      "ember-template-lint --fix",
+      "git add"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "git add"
+    ]
+  },
+
   "volta": {
     "node": "20.6.1",
     "pnpm": "9.10.0"

@@ -1,6 +1,5 @@
-<span
-  class="chip {{if this._isSelected "chip--selected"}}"
-  {{on "click" this.toggleSelection}}
+<button
+  class="chip {{if this._isSelected "chip-selected"}}" type="button" {{on "click" this.toggleSelection}}
 >
   {{@name}}
-</span>
+</button>

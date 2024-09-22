@@ -21,17 +21,18 @@ export default class ApplicationAdapter extends RESTAdapter {
     let url = super.buildURL(...arguments);
 
     if (modelName === 'repository') {
-      if (requestType === 'query' && query && query.adapterOptions) {
+      if (requestType === 'query' && query?.adapterOptions) {
         let { organization } = query.adapterOptions;
         url = `${this.host}/orgs/${organization}/repos`;
       }
     } else if (modelName === 'branch') {
-      if (requestType === 'query' && query && query.adapterOptions) {
+      if (requestType === 'query' && query?.adapterOptions) {
         let { organization, repositoryName } = query.adapterOptions;
         url = `${this.host}/repos/${organization}/${repositoryName}/branches`;
       }
     }
 
+    // clean up adapterOptions to avoid sending them as query param to the end url
     query.adapterOptions = {};
     return url;
   }

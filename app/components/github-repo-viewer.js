@@ -4,8 +4,8 @@ import { inject as service } from '@ember/service';
 import { tracked } from '@glimmer/tracking';
 
 export default class GithubRepoViewerComponent extends Component {
-  @service store;
   @service auth;
+  @service github;
   @service storage;
 
   @tracked isLoading = false;
@@ -41,7 +41,7 @@ export default class GithubRepoViewerComponent extends Component {
 
   get showNoRepositoriesMessage() {
     return (
-      this.submittedOrganization &&
+      this.organization &&
       this.repositories !== null &&
       this.repositories.length === 0 &&
       !this.errorMessage
@@ -104,8 +104,8 @@ export default class GithubRepoViewerComponent extends Component {
     this.storage.setItem(this.localStorageKeys.showPublic, this.showPublic);
   }
 
-  @action async onSubmitOrganizationForm(e) {
-    e.preventDefault();
+  @action async onSubmitOrganizationForm(name) {
+    this.organization = name.trim();
 
     await this.fetchOrganizationRepositories();
   }
@@ -119,29 +119,15 @@ export default class GithubRepoViewerComponent extends Component {
     try {
       this.isLoading = true;
       this.errorMessage = '';
-      /* TODO: it would be great to add pagination, see docs:
-       https://docs.github.com/en/rest/using-the-rest-api/using-pagination-in-the-rest-api?apiVersion=2022-11-28
-       I ran out of time to make it working, reverted all pagination related logic
-       */
 
-      this.repositories = await this.store.query('repository', {
-        page: 1,
-        per_page: 100,
-        adapterOptions: {
-          organization: this.organization,
-        },
+      this.repositories = await this.github.fetchRepositories({
+        organization: this.organization,
       });
 
-      this.submittedOrganization = this.organization;
       this.programmingLanguages = this.retrieveProgrammingLanguages();
       this.saveState();
     } catch (error) {
-      const message =
-        // TODO: handle other response statuses to show more meaningful error messages
-        error.isAdapterError && error.errors?.at(0)?.status === '404'
-          ? 'There is no such organization or you do not have sufficient permissions.'
-          : '';
-      this.errorMessage = message || error.message;
+      this.errorMessage = error.message;
       this.repositories = [];
     } finally {
       this.isLoading = false;
@@ -156,11 +142,6 @@ export default class GithubRepoViewerComponent extends Component {
         (lang) => lang !== programmingLanguage,
       );
     }
-  }
-
-  @action
-  updateOrganization(event) {
-    this.organization = event.target.value;
   }
 
   @action

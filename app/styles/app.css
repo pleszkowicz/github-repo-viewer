@@ -1,8 +1,11 @@
-/* app/styles/app.css */
-
 body {
   font-family: Arial, sans-serif;
   margin: 20px;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #ccc;
 }
 
 .error {
@@ -30,7 +33,7 @@ body {
 }
 
 .branches-list {
-  list-style-type: circle;
+  list-style-type: disc;
 }
 
 .branches-list li {
@@ -42,7 +45,7 @@ label {
   margin-bottom: 5px;
 }
 
-input[type='text'] {
+input[type="text"] {
   width: 300px;
   padding: 5px;
 }
@@ -53,16 +56,26 @@ button {
 }
 
 .chip {
+  border: none;
   display: inline-block;
   padding: 5px 10px;
   margin: 2px;
   background-color: #e0e0e0;
   border-radius: 16px;
   cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: #f0f0f0;
+  }
 }
 
-.chip--selected {
+.chip-selected {
   background-color: #007bff;
   color: white;
-}
 
+  &:hover {
+    background-color: #007bff;
+    color: white;
+  }
+}

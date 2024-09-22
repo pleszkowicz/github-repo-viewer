@@ -1,0 +1,20 @@
+<form {{on "submit" this.onSubmit}}>
+  <p>Provide organization name:</p>
+  <label>
+    {{!-- TODO: Nice to have - field validation --}}
+    <input
+      required
+      tabindex="0"
+      type="text"
+      placeholder="eg. github"
+      value={{this.organization}}
+      {{on "input" this.updateOrganization}}
+    />
+  </label>
+
+  <button type="submit" disabled={{@isLoading}}>Fetch Repositories</button>
+
+  {{#if @errorMessage}}
+    <div class="error">{{@errorMessage}}</div>
+  {{/if}}
+</form>
